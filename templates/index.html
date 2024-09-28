@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chọn Gói Dịch Vụ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #e6eeff;
+      }
+      .sidebar {
+        background-color: #2196f3;
+        color: white;
+      }
+      .sidebar a {
+        transition: background-color 0.3s;
+      }
+      .sidebar a:hover,
+      .sidebar a.active {
+        background-color: #1e88e5;
+      }
+      .content-box {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .btn {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      .filter-button {
+        background-color: #f0f0f0;
+        color: #333;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+      .filter-button.active,
+      .filter-button:hover {
+        background-color: #2196f3;
+        color: white;
+      }
+      .package {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+      .package-header {
+        background-color: #2196f3;
+        color: white;
+        padding: 1rem;
+      }
+      .buy-button {
+        background-color: #ff4757;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+      .buy-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      .highlight {
+        color: #009900;
+        font-weight: bold;
+      }
+      .package-features {
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 15px;
+      }
+      .package-features li {
+        display: flex;
+        justify-content: space-between; /* Đảm bảo các phần tử được đẩy ra 2 bên */
+        align-items: center;
+      }
+      .package-features .icon {
+        margin-right: 10px;
+      }
+      .package-features .right {
+        margin-left: auto; /* Đẩy phần tử này sang bên phải */
+      }
+      .server-info {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      .marquee-span {
+        color: #ff0000;
+        animation: colorChangeDVS 1s infinite alternate;
+      }
+
+      @keyframes colorChangeDVS {
+        0% {
+          color: #ff0000; /* Red */
+        }
+        25% {
+          color: #00ff00; /* Green */
+        }
+        50% {
+          color: #0000ff; /* Blue */
+        }
+        75% {
+          color: #ff00ff; /* Magenta */
+        }
+        100% {
+          color: #ffff00; /* Yellow */
+        }
+      }
+    </style>
+  </head>
+  <body class="flex min-h-screen">
+    <!-- Sidebar -->
+    <div class="sidebar w-64 p-4 flex flex-col">
+      <h1 class="text-2xl font-bold mb-6">NEKO VPN</h1>
+      <nav class="flex-grow">
+        <ul class="space-y-2">
+          <li>
+            <a href="{{ url_for('home_page') }}" class="block py-2 px-4 rounded"
+              >Trang Chủ</a
+            >
+          </li>
+
+          <li>
+            <a href="{{ url_for('document') }}" class="block py-2 px-4 rounded"
+              >Tài liệu sử dụng</a
+            >
+          </li>
+          <li class="font-bold mt-4 mb-2 text-sm">GÓI DỊCH VỤ</li>
+          <li>
+            <a
+              href="{{ url_for('index') }}"
+              class="block py-2 px-4 rounded active"
+              >Mua Gói Dịch Vụ</a
+            >
+          </li>
+          <li>
+            <a href="#" class="block py-2 px-4 rounded"
+              >Trạng thái [ Mấy Chủ ]</a
+            >
+          </li>
+          <li>
+            <a href="#" class="block py-2 px-4 rounded">Tiện Ích & Đổi Nền</a>
+          </li>
+          <li class="font-bold mt-4 mb-2 text-sm">TÀI CHÍNH</li>
+          <li>
+            <a href="#" class="block py-2 px-4 rounded">Đơn Hàng Của Tôi</a>
+          </li>
+          <li><a href="#" class="block py-2 px-4 rounded">Cộng Tác Viên</a></li>
+          <li class="font-bold mt-4 mb-2 text-sm">NGƯỜI DÙNG</li>
+          <li>
+            <a href="#" class="block py-2 px-4 rounded">Trung Tâm Kiểm Soát</a>
+          </li>
+          <li>
+            <a href="#" class="block py-2 px-4 rounded">Chi Tiết Dung Lượng</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Main content -->
+    <div class="flex-1 p-8">
+      <header class="flex justify-between items-center mb-8">
+        <h2 class="text-2xl font-bold text-gray-800">
+          Chọn gói phù hợp với bạn nhất
+        </h2>
+        <div class="flex items-center space-x-4">
+          <button class="text-2xl">⚙️</button>
+          <button class="text-2xl">🌐</button>
+          <button class="text-2xl">👤</button>
+        </div>
+      </header>
+
+      <div class="filter-buttons mb-6 flex space-x-2">
+        <button class="filter-button active">Tất cả</button>
+        <button class="filter-button">Chu kỳ</button>
+        <button class="filter-button">Theo lưu lượng</button>
+      </div>
+
+      <div
+        class="packages grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <!-- GÓI 1: VĨNH VIỄN VINA VIP -->
+        <div class="package">
+          <div class="package-header">
+            <div class="package-title text-lg font-bold mb-2">
+              <span class="mr-2">🛒</span>
+              VĨNH VIỄN VINA VIP
+            </div>
+            <div class="package-price text-2xl font-bold">
+              70,000<sup>đ</sup> /Vĩnh Viễn
+            </div>
+          </div>
+          <div class="package-content p-4">
+            <marquee scroll="0"
+              ><span class="marquee-span"
+                >DÙNG FULL APP CHIẾN ALL GAME
+              </span></marquee
+            >
+            <div class="app-icons mb-4">
+              <img
+                src="https://i.imgur.com/jfzUyNm.png"
+                alt="mxh"
+                class="w-full"
+              />
+            </div>
+            <ul class="package-features">
+              <li>
+                <span class="mr-2">🚀</span> Tốc Độ:
+                <span class="highlight right">Tối Đa 2 Gbps</span>
+              </li>
+              <li>
+                <span class="mr-2">💾</span> Dung Lượng:
+                <span class="highlight right">512 GB</span>
+              </li>
+              <li>
+                <span class="mr-2">📱</span> Giới Hạn:
+                <span class="highlight right">Id: 2 Thiết Bị/Gói</span>
+              </li>
+              <li>
+                <span class="mr-2">🛠️</span> Hỗ Trợ:
+                <span class="highlight right">ADR - IOS</span>
+              </li>
+              <li>
+                <span class="mr-2">💬</span> Chi Hỗ Trợ SMS:
+                <span class="highlight right">VINA Soạn YT30 gửi 888</span>
+              </li>
+            </ul>
+            <div class="server-info">Hệ Thống Máy Chủ</div>
+            <div class="country-flags mb-4">
+              <img
+                src="https://i.imgur.com/VIL0QiU.png"
+                alt="mxh"
+                class="w-full"
+              />
+            </div>
+          </div>
+
+          <div class="p-4">
+            <button
+              class="buy-button w-full"
+              onclick="window.location.href='{{ url_for('payment', speed='2 Gbps', storage='512 GB', device_limit='2', support='ADR - IOS',price = '70,000đ') }}'"
+              class="buy-button"
+            >
+              Mua ngay
+            </button>
+          </div>
+        </div>
+
+        <!-- Thêm các gói dịch vụ khác tương tự ở đây -->
+      </div>
+    </div>
+  </body>
+</html>

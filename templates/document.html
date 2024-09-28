@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tài liệu sử dụng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #e6eeff;
+        margin: 0;
+      }
+
+      .search-container {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 20px;
+      }
+
+      .search-bar {
+        width: 80%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        outline: none;
+      }
+
+      .search-btn {
+        width: 40px;
+        height: 40px;
+        background-color: #0066cc;
+        border: none;
+        border-radius: 5px;
+        margin-left: 10px;
+        cursor: pointer;
+      }
+
+      .search-btn::before {
+        content: "\1F50E"; /* Unicode for magnifying glass icon */
+        font-size: 20px;
+        color: white;
+      }
+
+      .guide-container {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        flex-grow: 1;
+      }
+
+      .guide-header {
+        background-color: #a7c8f3;
+        padding: 10px 15px;
+        font-size: 18px;
+        font-weight: bold;
+        color: black;
+        text-align: center;
+      }
+
+      .guide-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .guide-item {
+        padding: 15px;
+        border-bottom: 1px solid #e0e0e0;
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+      }
+
+      .guide-item:hover {
+        background-color: #f1f1f1;
+      }
+
+      .guide-item:last-child {
+        border-bottom: none;
+      }
+
+      .guide-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .guide-date {
+        font-size: 12px;
+        color: #888;
+      }
+
+      .sidebar {
+        background-color: #2196f3;
+        color: white;
+      }
+      .sidebar a {
+        transition: background-color 0.3s;
+      }
+      .sidebar a:hover,
+      .sidebar a.active {
+        background-color: #1e88e5;
+      }
+
+      .content {
+        padding: 20px;
+        background-color: white;
+        flex-grow: 1;
+      }
+
+      .document-content {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 80%;
+        height: 100%;
+        max-height: 80%; /* Chiều cao tối đa */
+        background-color: white;
+        padding: 20px;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+        display: none;
+        overflow-y: auto; /* Cuộn dọc nếu nội dung vượt quá chiều cao */
+        border-radius: 8px; /* Bo góc */
+        z-index: 1000; /* Đảm bảo hiển thị trên các phần khác */
+        transform: translateY(0); /* Đặt lại vị trí */
+        transition: transform 0.3s ease; /* Hiệu ứng di chuyển */
+      }
+      .document-content h2 {
+        font-size: 24px; /* Kích thước chữ tiêu đề */
+        margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+        color: #333; /* Màu chữ tiêu đề */
+      }
+
+      .document-content p {
+        font-size: 16px; /* Kích thước chữ cho nội dung */
+        margin-bottom: 15px; /* Khoảng cách giữa các đoạn */
+        color: #555; /* Màu chữ cho nội dung */
+      }
+
+      .document-content a {
+        color: #007bff; /* Màu link */
+        text-decoration: underline; /* Gạch chân link */
+      }
+
+      /* Tạo lớp cho hiệu ứng di chuyển từ phải qua trái */
+      .slide-in {
+        opacity: 0;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+      }
+
+      .slide-in.active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      /* Hiệu ứng di chuyển từ phải qua trái */
+      .slide-in {
+        opacity: 0;
+        transform: translateX(100%); /* Bắt đầu từ bên phải */
+        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+      }
+
+      .active {
+        opacity: 1;
+        transform: translateX(0); /* Về vị trí ban đầu */
+      }
+
+      /* Các kiểu dáng bổ sung */
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex min-h-screen">
+      <!-- Sidebar -->
+      <div class="sidebar w-64 p-4 flex flex-col">
+        <h1 class="text-2xl font-bold mb-6">NEKO VPN</h1>
+        <nav class="flex-grow">
+          <ul class="space-y-2">
+            <li>
+              <a
+                href="{{ url_for('home_page') }}"
+                class="block py-2 px-4 rounded"
+                >Trang Chủ</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('document') }}" class="block py-2 px-4 active"
+                >Tài liệu sử dụng</a
+              >
+            </li>
+            <li class="font-bold mt-4 mb-2 text-sm">GÓI DỊCH VỤ</li>
+            <li>
+              <a href="{{ url_for('index') }}" class="block py-2 px-4 rounded"
+                >Mua Gói Dịch Vụ</a
+              >
+            </li>
+            <li>
+              <a href="#" class="block py-2 px-4 rounded"
+                >Trạng thái [ Mấy Chủ ]</a
+              >
+            </li>
+            <li>
+              <a href="#" class="block py-2 px-4 rounded">Tiện Ích & Đổi Nền</a>
+            </li>
+            <li class="font-bold mt-4 mb-2 text-sm">TÀI CHÍNH</li>
+            <li>
+              <a href="#" class="block py-2 px-4 rounded">Đơn Hàng Của Tôi</a>
+            </li>
+            <li>
+              <a href="#" class="block py-2 px-4 rounded">Cộng Tác Viên</a>
+            </li>
+            <li class="font-bold mt-4 mb-2 text-sm">NGƯỜI DÙNG</li>
+            <li>
+              <a href="#" class="block py-2 px-4 rounded"
+                >Trung Tâm Kiểm Soát</a
+              >
+            </li>
+            <li>
+              <a href="#" class="block py-2 px-4 rounded"
+                >Chi Tiết Dung Lượng</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="flex flex-col flex-grow">
+        <div class="search-container">
+          <input
+            type="text"
+            placeholder="Tìm kiếm tài liệu"
+            class="search-bar"
+          />
+          <button class="search-btn"></button>
+        </div>
+
+        <div class="guide-container">
+          <div class="guide-header">Hướng Dẫn</div>
+          <ul class="guide-list">
+            <li class="guide-item" onclick="showDocument('doc1')">
+              <span class="guide-title">Hướng Dẫn Viettel + Vina</span>
+              <span class="guide-date">Cập nhật gần đây: 26/09/2024</span>
+            </li>
+            <li class="guide-item" onclick="showDocument('doc2')">
+              <span class="guide-title">Hướng Dẫn Chia Sẻ Mạng</span>
+              <span class="guide-date">Cập nhật gần đây: 09/09/2024</span>
+            </li>
+            <li class="guide-item" onclick="showDocument('doc3')">
+              <span class="guide-title">Hướng Dẫn Mua Gói Mạng</span>
+              <span class="guide-date">Cập nhật gần đây: 01/07/2024</span>
+            </li>
+            <li class="guide-item" onclick="showDocument('doc4')">
+              <span class="guide-title">Hướng Dẫn Fix Lỗi Mạng</span>
+              <span class="guide-date">Cập nhật gần đây: 08/08/2024</span>
+            </li>
+            <li class="guide-item" onclick="showDocument('doc5')">
+              <span class="guide-title">Hướng Dẫn Dùng Mạng Cho Windows</span>
+              <span class="guide-date">Cập nhật gần đây: 08/09/2024</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Document Content -->
+    <div id="documentContent" class="document-content">
+      <span class="close-btn" onclick="closeDocument()">&times;</span>
+      <h2 id="documentTitle"></h2>
+      <div id="documentBody"></div>
+    </div>
+
+    <script>
+      // Lắng nghe sự kiện chuyển động kết thúc một lần sau khi DOM được tải
+      document.addEventListener("DOMContentLoaded", () => {
+        const content = document.getElementById("documentContent");
+
+        // Xóa lớp hiệu ứng sau khi hoàn tất
+        content.addEventListener("transitionend", () => {
+          content.classList.remove("slide-in", "active");
+        });
+      });
+
+      function showDocument(docId) {
+        const content = document.getElementById("documentContent");
+        const title = document.getElementById("documentTitle");
+        const body = document.getElementById("documentBody");
+
+        // Hiển thị documentContent và thêm lớp hiệu ứng
+        content.style.display = "block";
+        content.classList.add("slide-in");
+
+        if (docId === "doc2") {
+          title.textContent = "Hướng Dẫn Chia Sẻ Mạng";
+          body.innerHTML = `
+              <p>Hãy bấm vào link này để đến trang hướng dẫn phát mạng nhé:</p>
+              <p><a href="https://meoohome.blogspot.com/2024/05/huong-dan-chia-se-wi-fi-bang-mang.html" target="_blank">meoohome.blogspot.com/2024/05/huong-dan-chia-se-wi-fi-bang-mang.html</a></p>
+              <p>Hoặc Xem Video Hướng Dẫn: <a href="https://files.catbox.moe/cu9781.mp4" target="_blank">files.catbox.moe/cu9781.mp4</a></p>
+            `;
+        } else {
+          title.textContent = "Thông tin về tài liệu sẽ được cập nhật sau.";
+          body.textContent = "Chi tiết về hướng dẫn này sẽ được bổ sung.";
+        }
+
+        // Kích hoạt hiệu ứng sau khi nội dung đã được thay đổi
+        setTimeout(() => {
+          content.classList.add("active");
+        }, 10);
+      }
+
+      function closeDocument() {
+        const content = document.getElementById("documentContent");
+
+        // Ẩn tài liệu và reset vị trí
+        content.style.display = "none";
+        content.classList.remove("slide-in", "active");
+      }
+    </script>
+
+    <style></style>
+  </body>
+</html>

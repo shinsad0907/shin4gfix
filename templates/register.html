@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='test.css') }}"
+    />
+    <title>Đăng Ký Neko VPN</title>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-header">
+        <h2>Shin VPN</h2>
+        <div class="version">1.7.6 dev</div>
+      </div>
+      <div class="logo-container">
+        <img
+          src="{{ url_for('static', filename='images/shin-chan.gif') }}"
+          alt="Shin-Chan VPN Logo"
+          class="logo"
+        />
+      </div>
+      <div class="slogan">4G Giá Rẻ + Uy Tín + Chất Lượng</div>
+      <form
+        class="login-form"
+        id="login-form"
+        action="{{ url_for('register') }}"
+        method="POST"
+      >
+        <input
+          type="email"
+          name="email"
+          placeholder="Tài Khoản Email"
+          required
+        />
+        <div class="password-container">
+          <input
+            type="password"
+            name="password"
+            placeholder="Mật Khẩu"
+            required
+          />
+          <button type="button" class="show-password">
+            <img
+              src="{{ url_for('static', filename='images/eyeball.png') }}"
+              alt="Show Password"
+            />
+          </button>
+        </div>
+        <div class="password-container">
+          <input
+            type="awaypassword"
+            name="awaypassword"
+            placeholder="Mật Khẩu"
+            required
+          />
+          <button type="button" class="show-password">
+            <img
+              src="{{ url_for('static', filename='images/eyeball.png') }}"
+              alt="Show Password"
+            />
+          </button>
+        </div>
+        <button type="submit">Đăng Ký</button>
+      </form>
+      <div class="login-options">
+        <a href="{{ url_for('login') }}">Quay lại Đăng Nhập</a>
+      </div>
+    </div>
+  </body>
+</html>

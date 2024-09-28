@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='test.css') }}"
+    />
+    <title>Neko VPN Login</title>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-header">
+        <h2>Shin VPN</h2>
+        <div class="version">1.7.6 dev</div>
+      </div>
+      <div class="logo-container">
+        <img
+          src="{{ url_for('static', filename='images/shin-chan.gif') }}"
+          alt="Shin-Chan VPN Logo"
+          class="logo"
+        />
+      </div>
+      <div class="slogan">4G Giá Rẻ + Uy Tín + Chất Lượng</div>
+      <form
+        class="login-form"
+        id="login-form"
+        action="{{ url_for('login') }}"
+        method="POST"
+      >
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Tài Khoản Email"
+          required
+        />
+        <div class="password-container">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Mật Khẩu"
+            required
+          />
+          <button type="button" class="show-password">
+            <img
+              src="{{ url_for('static', filename='images/eyeball.png') }}"
+              alt="Show Password"
+            />
+          </button>
+        </div>
+        <button type="submit">Đăng Nhập</button>
+      </form>
+      <div class="login-options">
+        <a href="{{ url_for('register') }}" id="show-register">Đăng Ký</a>
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <ul>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
+
+        <a href="#">Quên Mật Khẩu</a>
+      </div>
+      <div class="language-select">
+        <span>🌐 Tiếng Việt</span>
+      </div>
+    </div>
+  </body>
+</html>

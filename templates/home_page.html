@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NEKO VPN - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #e6eeff;
+      }
+      .sidebar {
+        background-color: #2196f3;
+        color: white;
+      }
+      .sidebar a {
+        transition: background-color 0.3s;
+      }
+      .sidebar a:hover,
+      .sidebar a.active {
+        background-color: #1e88e5;
+      }
+      .content-box {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .btn {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      .btn-red {
+        background-color: #ff4757;
+        color: white;
+      }
+      .btn-blue {
+        background-color: #2196f3;
+        color: white;
+      }
+      .btn-yellow {
+        background-color: #ffa502;
+        color: white;
+      }
+      .btn-gray {
+        background-color: #747d8c;
+        color: white;
+      }
+      .btn-purple {
+        background-color: #9b59b6;
+        color: white;
+      }
+      .progress-bar {
+        height: 8px;
+        border-radius: 4px;
+        background-color: #ecf0f1;
+      }
+      .progress-bar-fill {
+        height: 100%;
+        border-radius: 4px;
+        background-color: #2ecc71;
+      }
+      .avatar {
+        border: 2px solid #2196f3;
+      }
+      /* Modal styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 10px;
+      }
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body class="flex min-h-screen">
+    <!-- Sidebar -->
+    <div class="sidebar w-64 p-4 flex flex-col">
+      <h1 class="text-2xl font-bold mb-6">NEKO VPN</h1>
+      <nav class="flex-grow">
+        <ul class="space-y-2">
+          <li>
+            <a
+              href="{{ url_for('home_page') }}"
+              class="block py-2 px-4 rounded active"
+              >Trang Chủ</a
+            >
+          </li>
+          <li>
+            <a href="{{ url_for('document') }}" class="block py-2 px-4 rounded"
+              >Tài liệu sử dụng</a
+            >
+          </li>
+          <li class="font-bold mt-4 mb-2 text-sm">GÓI DỊCH VỤ</li>
+          <li>
+            <a href="{{ url_for('index') }}" class="block py-2 px-4 rounded"
+              >Mua Gói Dịch Vụ</a
+            >
+          </li>
+          <li>
+            <a href="#" class="block py-2 px-4 rounded"
+              >Trạng thái [ Mấy Chủ ]</a
+            >
+          </li>
+          <li>
+            <a href="#" class="block py-2 px-4 rounded">Tiện Ích & Đổi Nền</a>
+          </li>
+          <li class="font-bold mt-4 mb-2 text-sm">TÀI CHÍNH</li>
+          <li>
+            <a href="#" class="block py-2 px-4 rounded">Đơn Hàng Của Tôi</a>
+          </li>
+          <li><a href="#" class="block py-2 px-4 rounded">Cộng Tác Viên</a></li>
+          <li class="font-bold mt-4 mb-2 text-sm">NGƯỜI DÙNG</li>
+          <li>
+            <a href="#" class="block py-2 px-4 rounded">Trung Tâm Kiểm Soát</a>
+          </li>
+          <li>
+            <a href="#" class="block py-2 px-4 rounded">Chi Tiết Dung Lượng</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Main content -->
+    <div class="flex-1 p-8">
+      <header class="flex justify-between items-center mb-8">
+        <h2 class="text-2xl font-bold text-gray-800">Trang Chủ</h2>
+        <div class="flex items-center space-x-4">
+          <button class="text-2xl">⚙️</button>
+          <button class="text-2xl">🌐</button>
+          <button class="text-2xl">👤</button>
+        </div>
+      </header>
+
+      <!-- Banner image -->
+      <div class="mb-8">
+        <img
+          src="/api/placeholder/800/200"
+          alt="Banner"
+          class="w-full h-48 object-cover rounded-lg"
+        />
+      </div>
+
+      <!-- Account Information -->
+      <div class="content-box p-6 mb-8">
+        <h3 class="text-xl font-bold mb-4 text-gray-800">
+          THÔNG TIN TÀI KHOẢN
+        </h3>
+        <div class="flex items-center mb-4">
+          <img
+            src="/api/placeholder/50/50"
+            alt="Avatar"
+            class="w-12 h-12 rounded-full mr-4 avatar"
+          />
+          <div>
+            <p class="font-semibold text-gray-800">shinnohope.0907@gmail.com</p>
+            <p class="text-sm text-gray-500">THAM GIA NGÀY: 19/09/2024</p>
+          </div>
+        </div>
+        <p class="mb-2 text-gray-700">
+          Số Dư: <span class="font-semibold">0 VNĐ</span>
+        </p>
+        <button class="btn btn-red mb-4">Nạp Tiền</button>
+        <div>
+          <p class="mb-2 text-gray-700 font-semibold">
+            Cộng Đồng Của Chúng Tôi
+          </p>
+          <button class="btn btn-blue mr-2">Nhóm Zalo</button>
+          <button class="btn btn-blue">Nhóm Telegram</button>
+        </div>
+      </div>
+
+      <!-- Package Information -->
+      <div class="content-box p-6">
+        <h3 class="text-xl font-bold mb-4 text-gray-800">THÔNG TIN GÓI</h3>
+        <p class="mb-2 text-gray-600 text-sm">
+          Hết hạn vào 20/10/2024, còn 23 ngày, Data được reset sau 23 ngày
+        </p>
+        <div class="progress-bar mb-4">
+          <div class="progress-bar-fill" style="width: 4%"></div>
+        </div>
+        <p class="mb-2 text-gray-700">
+          Đã sử dụng <span class="font-semibold">12.18 GB</span> / Tổng dung
+          lượng <span class="font-semibold">300.00 GB</span>
+        </p>
+        <p class="mb-4 text-gray-700">
+          SNI đang dùng:
+          <span class="font-semibold">NẾN YTB VINA + VIETTEL</span>
+        </p>
+        <p class="mb-4 text-gray-700">
+          Thiết bị Online: <span class="font-semibold">0/2</span>
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <button class="btn btn-blue">Cài Đặt SNI</button>
+          <button class="btn btn-yellow">Hướng Dẫn Sử Dụng</button>
+          <button class="btn btn-gray">Lấy ID Apple</button>
+          <button class="btn btn-purple">Đồng Bộ Máy Chủ Về APP</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="notificationModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="text-xl font-bold text-blue-600 mb-4">MB</div>
+        <p class="text-orange-500 font-bold text-center mb-4">
+          NHỮNG BẠN DÙNG APP NGÂN HÀNG MB BANK NÊN XEM KĨ NỘI DUNG TRƯỚC KHI
+          CHUYỂN KHOẢN !
+        </p>
+        <div
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
+        >
+          <strong class="font-bold">Xin Lỗi Quý Khách !</strong>
+          <p>
+            Chúng Tôi Tạm Thời Bảo Trì Hệ Thống Sever Youtube Vina Và Sẽ Sớm Mở
+            Bán Trở Lại.
+          </p>
+          <p class="mt-2">
+            Cảm ơn quý khách đã thông cảm và kiên nhẫn trong thời gian này.
+          </p>
+        </div>
+        <button id="contactSupport" class="btn btn-blue w-full">
+          Liên hệ hỗ trợ
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Get the modal
+      var modal = document.getElementById("notificationModal");
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the page loads, open the modal
+      window.onload = function () {
+        modal.style.display = "block";
+      };
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+
+      // Close modal when "Liên hệ hỗ trợ" button is clicked
+      document.getElementById("contactSupport").onclick = function () {
+        modal.style.display = "none";
+      };
+    </script>
+  </body>
+</html>

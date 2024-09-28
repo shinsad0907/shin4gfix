@@ -1,0 +1,145 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.page-title {
+  color: #333;
+  text-align: center;
+}
+
+.main-content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.package-info {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 65%;
+}
+
+.package-info h2 {
+  color: #007bff;
+  text-align: center;
+}
+
+.package-subtitle {
+  color: #dc3545;
+  text-align: center;
+  font-weight: bold;
+}
+
+.app-icons {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.app-icons img {
+  width: 40px;
+  height: 40px;
+  margin: 0 10px;
+}
+
+.features-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.features-list li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.feature-label {
+  font-weight: bold;
+}
+
+.feature-value {
+  background-color: #dc3545;
+  color: white;
+  padding: 2px 10px;
+  border-radius: 15px;
+}
+
+.system-info {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.server-flags {
+  display: flex;
+  justify-content: center;
+}
+
+.server-flags img {
+  width: 30px;
+  height: 20px;
+  margin: 0 5px;
+}
+
+.order-summary {
+  background-color: #343a40;
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 30%;
+}
+
+.discount-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.total-price {
+  margin-top: 20px;
+}
+
+.price-item,
+.total {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.payment-details {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.payment-cycle {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #dee2e6;
+  padding: 10px;
+  border-radius: 5px;
+}

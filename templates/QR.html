@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cổng thanh toán qua ngân hàng MB</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        color: #e6007e;
+        margin-bottom: 20px;
+      }
+      .qr-container {
+        background-color: #3498db;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+      }
+      .qr-code {
+        background-color: white;
+        padding: 10px;
+        display: inline-block;
+        margin: 20px 0;
+      }
+      .info-container {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+      }
+      .info-item {
+        margin-bottom: 10px;
+      }
+      .info-item strong {
+        display: block;
+        color: #6c757d;
+      }
+      .timer {
+        text-align: center;
+        margin-top: 20px;
+      }
+      .timer span {
+        background-color: #3498db;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin: 0 5px;
+      }
+      .button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #3498db;
+        color: white;
+        text-align: center;
+        border: none;
+        border-radius: 5px;
+        margin-top: 20px;
+        cursor: pointer;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 20px;
+        color: #6c757d;
+        font-size: 0.8em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="header">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 2L2 7L12 12L22 7L12 2Z"
+            stroke="#e6007e"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M2 17L12 22L22 17"
+            stroke="#e6007e"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M2 12L12 17L22 12"
+            stroke="#e6007e"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        Cổng thanh toán qua ngân hàng MB
+      </h1>
+
+      <div class="qr-container">
+        <h2>Quét mã QR để thanh toán</h2>
+        <p>
+          Sau khi quét mã QR hãy xem lại nội dung chuyển và đối chiếu với nội
+          dung ở phía dưới
+        </p>
+        <div class="qr-code">
+          <img
+            src="{{ url_for('static', filename='images/QR.png') }}"
+            alt="QR Code"
+            width="200"
+            height="200"
+          />
+        </div>
+        <p>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2L2 7L12 12L22 7L12 2Z"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          Sử dụng App ngân hàng hoặc ứng dụng camera hỗ trợ QR code để quét mã
+        </p>
+      </div>
+
+      <div class="info-container">
+        <h3>Thông tin đơn hàng</h3>
+        <div class="info-item">
+          <p><strong>Mã đơn hàng:</strong> {{ package_info }}</p>
+        </div>
+        <div class="info-item">
+          <strong>Chủ tài khoản</strong>
+          VO LE TRIEU LAN
+        </div>
+        <div class="info-item">
+          <strong>Số tài khoản</strong>
+          090720072018
+        </div>
+        <div class="info-item">
+          <strong>Nội dung chuyển tiền</strong>
+          HDPATTV3814
+        </div>
+        <div class="info-item">
+          <strong>Ngân hàng thụ hưởng</strong>
+          NGÂN HÀNG QUÂN ĐỘI MB
+        </div>
+        <div class="info-item">
+          <strong>Số tiền</strong>
+          {{ price }}
+        </div>
+      </div>
+
+      <div class="timer">
+        <p>Đơn hàng sẽ hết hạn sau:</p>
+        <span id="minutes">30</span> Phút <span id="seconds">0</span> Giây
+      </div>
+
+      <button class="button">Quay lại</button>
+
+      <div class="footer">
+        © 2024 - Cổng thanh toán MB v4.0.0<br />
+        Powered by API.VNPN
+      </div>
+    </div>
+    <script>
+      function startTimer(duration, displayMinutes, displaySeconds) {
+          let timer = duration, minutes, seconds;
+          setInterval(function () {
+              minutes = parseInt(timer / 60, 10);
+              seconds = parseInt(timer % 60, 10);
+
+              minutes = minutes < 10 ? "0" + minutes : minutes;
+              seconds = seconds < 10 ? "0" + seconds : seconds;
+
+              displayMinutes.textContent = minutes;
+              displaySeconds.textContent = seconds;
+
+              if (--timer < 0) {
+                  timer = 0; // Khi hết giờ, có thể thực hiện hành động khác
+              }
+          }, 1000);
+      }
+
+      window.onload = function () {
+          // Lấy thời gian còn lại từ server thông qua Flask (thông qua biến từ render_template)
+          let countdownTime = {{ time_remaining_seconds }};  // Thời gian còn lại (giây)
+          let displayMinutes = document.querySelector("#minutes");
+          let displaySeconds = document.querySelector("#seconds");
+
+          // Bắt đầu đếm ngược với thời gian đã truyền
+          startTimer(countdownTime, displayMinutes, displaySeconds);
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thiết lập gói</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='payment.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">NEKO VPN</div>
+        <div class="header-icons">
+          <div class="icon">⚙️</div>
+          <div class="icon">🌐</div>
+          <div class="icon">👤</div>
+        </div>
+      </header>
+
+      <nav>
+        <ul>
+          <li>Trang Chủ</li>
+          <li>Tài liệu sử dụng</li>
+          <li>Mua Gói Dịch Vụ</li>
+          <li>Tiện ích & Đổi Nền</li>
+          <li>Đơn Hàng Của Tôi</li>
+        </ul>
+      </nav>
+      <h1 class="page-title">Thiết lập gói</h1>
+
+      <div class="main-content">
+        <div class="package-info">
+          <h2>VĨNH VIỄN VINA VIP</h2>
+          <div class="package-details">
+            <marquee scroll="0"
+              ><span class="marquee-span"
+                >DÙNG FULL APP CHIẾN ALL GAME
+              </span></marquee
+            >
+            <div class="app-icons">
+              <img
+                class="ls-is-cached jch-lazyloaded"
+                src="https://i.imgur.com/jfzUyNm.png"
+                alt="mxh"
+                width="250"
+                height="50"
+              />
+            </div>
+            <ul class="features-list">
+              <li>
+                <span class="feature-label">Tốc Độ</span>
+                <span class="feature-value">{{ package.speed }}</span>
+              </li>
+              <li>
+                <span class="feature-label">Dung Lượng</span
+                ><span class="feature-value"> {{ package.data }} </span>
+              </li>
+              <li>
+                <span class="feature-label">Giới Hạn</span
+                ><span class="feature-value"
+                  >Id: {{ package.devices }} Thiết Bị/Gói</span
+                >
+              </li>
+              <li>
+                <span class="feature-label">Hỗ Trợ</span
+                ><span class="feature-value">{{ package.support }}</span>
+              </li>
+              <li>
+                <span class="feature-label">Chi Hỗ Trợ SMS</span
+                ><span class="feature-value">{{ package.sms }}</span>
+              </li>
+            </ul>
+            <p class="system-info">Hệ Thống Máy Chủ</p>
+            <div class="server-flags">
+              <img
+                src="{{ url_for('static', filename='images/flag-vietnam.png') }}"
+                alt="Vietnam"
+              />
+              <img
+                src="{{ url_for('static', filename='images/flag-hongkong.png') }}"
+                alt="Hong Kong"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="order-summary">
+          <button class="discount-btn">Có phiếu giảm giá?</button>
+          <div class="total-price">
+            <h3>Tổng tiền đơn hàng</h3>
+            <p class="price-item">
+              VĨNH VIỄN VINA VIP x Vĩnh Viễn<span>{{ package.price }} đ</span>
+            </p>
+            <p class="total">Tổng<span>{{ package.price }} đ</span></p>
+            <button
+              onclick="window.location.href='{{ url_for('QR', price=package.price,order_id_buy=order_id_buy) }}'"
+              class="buy-button"
+            >
+              Mua ngay
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="payment-details">
+        <h3>Chu kỳ thanh toán</h3>
+        <p class="payment-cycle">Vĩnh Viễn<span>70,000 đ</span></p>
+      </div>
+    </div>
+  </body>
+</html>

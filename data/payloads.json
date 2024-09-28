@@ -1,0 +1,69 @@
+{
+    "data": [
+        {
+            "user": "shinnohope.0907@gmail.com",
+            "status": "active",
+            "history": {
+                "paying": [
+                    {
+                        "order_id_buy": "202409270236481485252792",
+                        "datetime": "2024-09-28 00:58:10",
+                        "type": "Gói VIP"
+                    }
+                ],
+                "payed": [
+                    {
+                        "order_id_buy": "202409260204426636486486",
+                        "datetime": "2024-09-26 16:02:06",
+                        "type": "Gói VIP"
+                    },
+                    {
+                        "order_id_buy": "202409270142308212559385",
+                        "datetime": "2024-09-27 01:44:42",
+                        "type": "Gói VIP"
+                    },
+                    {
+                        "order_id_buy": "202409270229585111543104",
+                        "datetime": "2024-09-27 02:29:59",
+                        "type": "Gói VIP"
+                    }
+                ]
+            }
+        },
+        {
+            "user": "doanngocphuc@gmail.com",
+            "status": "active",
+            "history": {
+                "paying": [
+                    {
+                        "order_id_buy": "202409270228248686369371",
+                        "datetime": "2024-09-27 02:28:30",
+                        "type": "Gói VIP"
+                    }
+                ],
+                "payed": [
+                    {
+                        "order_id_buy": "202409262200420131086353",
+                        "datetime": "2024-09-26 22:00:44",
+                        "type": "Gói VIP"
+                    },
+                    {
+                        "order_id_buy": "202409262325178915179312",
+                        "datetime": "2024-09-26 23:25:18",
+                        "type": "Gói VIP"
+                    },
+                    {
+                        "order_id_buy": "202409270017100829162266",
+                        "datetime": "2024-09-27 00:17:13",
+                        "type": "Gói VIP"
+                    },
+                    {
+                        "order_id_buy": "202409270045038021988510",
+                        "datetime": "2024-09-27 00:47:39",
+                        "type": "Gói VIP"
+                    }
+                ]
+            }
+        }
+    ]
+}
